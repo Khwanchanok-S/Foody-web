@@ -5,7 +5,6 @@ import ProductTypeLayout from '../layouts/ProductTypeLayout';
 export default function TypeofRestaurantspage() {
   return (
     <>
-      <Header />,
       <ProductTypeLayout />
     </>
   );

@@ -1,38 +1,56 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import AuthLayout from '../layouts/AuthLayout';
+
 import Homepage from '../pages/Homepage';
 import Loginpage from '../pages/Loginpage';
-import Profilepag from '../pages/Profilepage';
+
 import Reservepage from '../pages/Reservepage';
 import Restaurantpage from '../pages/Restaurantpage';
 import TypeofRestaurantspage from '../pages/TypeofRestaurantspage';
-import RegisterForm from '../features/auth/RegisterForm';
 
+import Registercontanier from '../features/auth/RegisterContainer';
+import RedirectIfAuthenticate from '../features/auth/RedirectIfAuthenticate';
+import ProtectedRoute from '../features/auth/ProtectedRoute';
+import AuthLayout from '../layouts/AuthLayout';
+import Profilepage from '../pages/Profilepage';
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Homepage />,
-  },
-
-  {
     path: '/login',
-    element: <Loginpage />,
+    element: (
+      // <RedirectIfAuthenticate>
+      <Loginpage />
+      // </RedirectIfAuthenticate>
+    ),
+  },
+  {
+    path: '/',
+    element: <AuthLayout />,
+    children: [
+      {
+        // path: '/',
+        index: true,
+        element: <Homepage />,
+      },
+      {
+        path: 'reserve',
+        element: (
+          // <ProtectedRoute>
+          <Reservepage />
+          // {/* </ProtectedRoute> */}
+        ),
+      },
+      {
+        path: 'profile/:userId',
+        element: <Profilepage />,
+      },
+      {
+        path: 'restaurant/:restaurantId',
+        element: <Restaurantpage />,
+      },
+      { path: 'type', element: <TypeofRestaurantspage /> },
+    ],
   },
 
-  {
-    path: '/reserve',
-    element: <Reservepage />,
-  },
-  {
-    path: '/profile/:userId',
-    element: <Profilepag />,
-  },
-  {
-    path: '/restaurant',
-    element: <Restaurantpage />,
-  },
-  { path: '/type', element: <TypeofRestaurantspage /> },
-  { path: '/1', element: <RegisterForm /> },
+  { path: '/1', element: <Registercontanier /> },
 
   {
     path: '/test',

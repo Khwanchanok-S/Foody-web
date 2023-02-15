@@ -1,29 +1,27 @@
 import React from 'react';
-import DropdownLocation from './DropdownLocation';
+import { Link } from 'react-router-dom';
+import Dropdown from './Dropdown';
 
 export default function () {
   return (
     <>
-      <div class="relative bg-white">
-        <div class="mx-auto max-w-7xl px-6">
-          <div class="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
-            <div class="flex justify-start ">
-              <a href="#">
-                <span class="sr-only">Foody</span>
+      <div className="relative bg-white">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+            <div className="flex justify-start ">
+              <Link className="navbar-brand" to="/">
+                <span className="sr-only">Foody</span>
 
-                <i class="fa-solid fa-bowl-food fa-lg "> Foody </i>
-              </a>
+                <i className="fa-solid fa-bowl-food fa-lg "> Foody </i>
+              </Link>
             </div>
-            <div class=" flex justify-start lg:w-0 lg:flex-1 space-x-4 ...">
-              <a
-                href="#"
-                class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-black shadow-sm bg-gray-200"
-              >
+            <div className=" flex justify-start lg:w-0 lg:flex-1 space-x-4 ...">
+              <Link className=" ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-black shadow-sm bg-gray-200">
                 {' '}
                 {/* <DropdownLocation /> */}
-                <i class="fa-solid fa-location-dot"> </i>
+                <i className="fa-solid fa-location-dot"> </i>
                 Location
-              </a>
+              </Link>
 
               <div>
                 <input
@@ -31,20 +29,25 @@ export default function () {
                   type="text"
                   placeholder="Search..."
                 />
-                <i class="fa-solid fa-magnifying-glass "></i>
+                <i className="fa-solid fa-magnifying-glass "></i>
               </div>
             </div>
 
-            <div class="grid grid-cols-3 gap-4">
-              {/* <div class="bg-orange-200 text-base text-blue-600"></div> */}
-              <div class="... invisible">02</div>
-              <a
+            {/* <div className="grid grid-cols-3 gap-4">
+              {/* <div className="bg-orange-200 text-base text-blue-600"></div> */}
+            {/* <div className="... invisible">02</div>
+              <Link
                 href="#"
-                class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm bg-orange-400"
+                className="nav-link ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm bg-orange-400"
+                to="/login"
               >
-                <i class="fa-regular fa-circle-user"></i>
+                <i className="fa-regular fa-circle-user"></i>
                 Login
-              </a>
+              </Link>
+            </div> */}
+
+            <div className="grid grid-cols-3 gap-4">
+              <Dropdown />
             </div>
           </div>
         </div>
