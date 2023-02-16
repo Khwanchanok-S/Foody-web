@@ -11,7 +11,6 @@ export default function ReviewContainer() {
       <div className="mx-2 d-flex flex-colum gap-3">
         {/* <ReviewCreateToggle /> */}
         <ShowReview />
-        <ReviewLayout />
       </div>
     </div>
   );

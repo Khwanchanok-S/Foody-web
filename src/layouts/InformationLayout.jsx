@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from '../config/axios';
+import { useParams } from 'react-router-dom';
 
 export default function InformationLayout() {
+  const [showPhoto, setShowPhoto] = useState({});
+  const { restaurantId } = useParams();
+
+  const fetchPhoto = async () => {
+    try {
+      const response = await axios.get(`/restaurants/${restaurantId}`);
+      const photoShow = response.data.restaurant;
+      // console.log(response.data.restaurant);
+      setShowPhoto(photoShow);
+      // console.log(photoShow);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  console.log(showPhoto);
+  useEffect(() => {
+    fetchPhoto();
+  }, []);
+
   return (
     <>
       <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
         <div className="aspect-w-3 aspect-h-4 Hidden overflow-Hidden rounded-lg lg:block">
           <img
-            src="https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg"
+            src={showPhoto.profileImage}
             alt="Two each of gray, white, and black shirts laying flat."
             className="h-full w-full object-cover object-center"
           />
@@ -38,8 +59,11 @@ export default function InformationLayout() {
       <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24 border-2 border-r-red-600">
         <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
           <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-            รสนิยม
+            {showPhoto.Name}
           </h1>
+          <h5 className="text-xl  tracking-tight text-gray-900 sm:text-1xl">
+            {showPhoto.information}
+          </h5>
         </div>
         <div className="mt-4 lg:row-span-3 lg:mt-0">
           <h2 className="sr-only">Product information</h2>
@@ -125,12 +149,12 @@ export default function InformationLayout() {
               117 reviews
             </a>
           </div>
-          <button
+          {/* <button
             type="button"
             className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900"
           >
             จองที่นั่ง
-          </button>
+          </button> */}
         </div>
       </div>
     </>
