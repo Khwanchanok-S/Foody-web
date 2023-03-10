@@ -25,7 +25,7 @@ export default function ReviewLayout({ setShowReview, showReview }) {
     <>
       <form onSubmit={handleSubmitForm}>
         <div className=" flex justify-center md:grid md:grid-cols-1  md:gap-6">
-          <h1>Review</h1>
+          <h1 className="p text-xl">Review</h1>
           <div className="mt-5 md:col-span-2 md:mt-0">
             {/* <div className="shadow sm:overflow-hidden sm:rounded-md">
               <div className="space-y-6 bg-white px-4 py-5 sm:p-6"></div>
@@ -48,7 +48,7 @@ export default function ReviewLayout({ setShowReview, showReview }) {
               </div>
             </div> */}{' '}
             <div className="shadow sm:overflow-hidden sm:rounded-md">
-              <div className="space-y-6 bg-white px-4 py-5 sm:p-6"></div>
+              <div className=" bg-white px-4 sm:p-6"></div>
               <div>
                 <label
                   htmlFor="about"

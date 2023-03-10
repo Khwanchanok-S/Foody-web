@@ -36,40 +36,42 @@ export default function ShowReview() {
 
   return (
     <>
-      {showReview?.map(el => {
-        return (
-          <>
-            <div className="shadow sm:overflow-hidden sm:rounded-md">
-              <div className="flex space-y-6 bg-white px-4 py-5 sm:p-6">
-                <div>
-                  <Avatar
-                    src={authenticatedUser.profileImage}
-                    size="50"
-                    borderSize="4"
-                    borderColor="white"
-                  />
-                  <label
-                    htmlFor="about"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    review
-                  </label>
-                  <span>{el?.detail}</span>
-                </div>
-                <div className="">
-                  <i class="fa-solid fa-pencil"></i>
-                  <i
-                    type="button"
-                    className="fa-regular fa-trash-can"
-                    onClick={() => handleDeleteReview(el.id)}
-                  ></i>
+      <div className="px-10">
+        {showReview?.map(el => {
+          return (
+            <>
+              <div className="shadow sm:overflow-hidden sm:rounded-md ">
+                <div className="flex space-y-6 bg-white px-4 py-5 sm:p-6">
+                  <div>
+                    <Avatar
+                      src={authenticatedUser?.profileImage}
+                      size="50"
+                      borderSize="4"
+                      borderColor="white"
+                    />
+                    <label
+                      htmlFor="about"
+                      className="block text-sm font-medium text-gray-700 "
+                    >
+                      review
+                    </label>
+                    <span>{el?.detail}</span>
+                  </div>
+                  <div className="">
+                    <i class="fa-solid fa-pencil"></i>
+                    <i
+                      type="button"
+                      className="fa-regular fa-trash-can"
+                      onClick={() => handleDeleteReview(el.id)}
+                    ></i>
+                  </div>
                 </div>
               </div>
-            </div>
-          </>
-        );
-      })}
-      <ReviewLayout setShowReview={setShowReview} showReview={showReview} />
+            </>
+          );
+        })}
+        <ReviewLayout setShowReview={setShowReview} showReview={showReview} />
+      </div>
     </>
   );
 }

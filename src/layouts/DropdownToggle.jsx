@@ -5,9 +5,9 @@ import useAuth from '../hook/useAuth';
 import profileImage from '../assets/blank.png';
 
 export default function DropdownToggle({ onClick }) {
-  const {
-    authenticatedUser: { profileImage },
-  } = useAuth();
+  // const {
+  //   authenticatedUser: { profileImage },
+  // } = useAuth();
   return (
     <div onClick={onClick}>
       <Link className="navbar-brand" to="">

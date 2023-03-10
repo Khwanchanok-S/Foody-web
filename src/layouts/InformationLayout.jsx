@@ -5,29 +5,32 @@ import { useParams } from 'react-router-dom';
 export default function InformationLayout() {
   const [showPhoto, setShowPhoto] = useState({});
   const { restaurantId } = useParams();
+  console.log(showPhoto);
 
   const fetchPhoto = async () => {
     try {
       const response = await axios.get(`/restaurants/${restaurantId}`);
       const photoShow = response.data.restaurant;
-      // console.log(response.data.restaurant);
+      console.log('ffffffff ', response);
+      // console.log('ffffffff ', response.data.restaurant);
       setShowPhoto(photoShow);
-      // console.log(photoShow);
     } catch (err) {
       console.log(err);
     }
   };
-  console.log(showPhoto);
   useEffect(() => {
+    console.log('useeffect');
     fetchPhoto();
   }, []);
+
+  console.log('showPhoto ---> ', showPhoto?.Images && showPhoto?.Images[1]);
 
   return (
     <>
       <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
         <div className="aspect-w-3 aspect-h-4 Hidden overflow-Hidden rounded-lg lg:block">
           <img
-            src={showPhoto.profileImage}
+            src={showPhoto?.profileImage}
             alt="Two each of gray, white, and black shirts laying flat."
             className="h-full w-full object-cover object-center"
           />
@@ -35,14 +38,14 @@ export default function InformationLayout() {
         <div className="Hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
           <div className="aspect-w-3 aspect-h-2 overflow-Hidden rounded-lg">
             <img
-              src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg"
+              src={showPhoto?.Images && showPhoto?.Images[1]?.url}
               alt="Model wearing plain black basic tee."
               className="h-full w-full object-cover object-center"
             />
           </div>
           <div className="aspect-w-3 aspect-h-2 overflow-Hidden rounded-lg">
             <img
-              src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg"
+              src={showPhoto?.Images && showPhoto?.Images[2]?.url}
               alt="Model wearing plain gray basic tee."
               className="h-full w-full object-cover object-center"
             />
@@ -50,7 +53,7 @@ export default function InformationLayout() {
         </div>
         <div className="aspect-w-4 aspect-h-5 sm:overflow-Hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
           <img
-            src="https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg"
+            src={showPhoto?.Images && showPhoto?.Images[3]?.url}
             alt="Model wearing plain white basic tee."
             className="h-full w-full object-cover object-center"
           />

@@ -8,7 +8,8 @@ import InformationLayout from '../layouts/InformationLayout';
 export default function Restaurantpage() {
   return (
     <>
-      <InformationLayout />,{/* <ReviewLayout /> */}
+      <InformationLayout />
+
       <ReviewContainer />
     </>
   );
