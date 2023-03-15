@@ -12,32 +12,31 @@ import RedirectIfAuthenticate from '../features/auth/RedirectIfAuthenticate';
 import ProtectedRoute from '../features/auth/ProtectedRoute';
 import AuthLayout from '../layouts/AuthLayout';
 import Profilepage from '../pages/Profilepage';
+import Adminpage from '../pages/Adminpage';
+import EditRespage from '../pages/EditRespage';
 const router = createBrowserRouter([
   {
     path: '/login',
     element: (
-      // <RedirectIfAuthenticate>
-      <Loginpage />
-      // </RedirectIfAuthenticate>
+      <RedirectIfAuthenticate>
+        <Loginpage />
+      </RedirectIfAuthenticate>
     ),
   },
   {
     path: '/',
-    element: <AuthLayout />,
+    element: (
+      <ProtectedRoute>
+        <AuthLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
-        // path: '/',
+        path: '/',
         index: true,
         element: <Homepage />,
       },
-      {
-        path: 'reserve',
-        element: (
-          // <ProtectedRoute>
-          <Reservepage />
-          // {/* </ProtectedRoute> */}
-        ),
-      },
+
       {
         path: 'profile/:userId',
         element: <Profilepage />,
@@ -50,12 +49,8 @@ const router = createBrowserRouter([
     ],
   },
 
-  { path: '/1', element: <Registercontanier /> },
-
-  {
-    path: '/test',
-    element: <h1>Test</h1>,
-  },
+  { path: '/admincreate', element: <Adminpage /> },
+  { path: '/editrestaurant/:restaurantId', element: <EditRespage /> },
 ]);
 
 export default function Router() {

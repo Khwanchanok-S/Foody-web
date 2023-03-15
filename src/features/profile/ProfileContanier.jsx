@@ -21,11 +21,13 @@ export default function ProfileContanier() {
     fetchProfileUser();
   }, [userId]);
   return (
-    <div
-      className="shadow-sm pb-2"
-      style={{ backgroundImage: 'linear-gradient(#fof2f5, #fff)' }}
-    >
-      <ProfilePanel profileUser={profileUser} />
+    <div className="px-80">
+      <div
+        className="shadow-xl  py-10 flex justify-center"
+        style={{ backgroundImage: 'linear-gradient(#fof2f5, #fff)' }}
+      >
+        <ProfilePanel profileUser={profileUser} />
+      </div>
     </div>
   );
 }

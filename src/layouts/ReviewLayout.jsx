@@ -6,14 +6,18 @@ import useAuth from '../hook/useAuth';
 export default function ReviewLayout({ setShowReview, showReview }) {
   const [title, setTitle] = useState('');
   const { restaurantId } = useParams();
+  const [isCreate, setIscreate] = useState(false);
 
   const handleSubmitForm = async event => {
     event.preventDefault();
-    console.log(title);
+    console.log('------> ', title);
     try {
       const response = await axios.post(`/reviews/${restaurantId}`, {
         detail: title,
       });
+      console.log('res -----> ', response.data.review);
+      console.log('showReview -----> ', showReview);
+      console.log(response.data.review);
       setShowReview([...showReview, response.data.review]);
     } catch (error) {
       console.log(error);
@@ -25,7 +29,6 @@ export default function ReviewLayout({ setShowReview, showReview }) {
     <>
       <form onSubmit={handleSubmitForm}>
         <div className=" flex justify-center md:grid md:grid-cols-1  md:gap-6">
-          <h1 className="p text-xl">Review</h1>
           <div className="mt-5 md:col-span-2 md:mt-0">
             {/* <div className="shadow sm:overflow-hidden sm:rounded-md">
               <div className="space-y-6 bg-white px-4 py-5 sm:p-6"></div>
@@ -53,17 +56,15 @@ export default function ReviewLayout({ setShowReview, showReview }) {
                 <label
                   htmlFor="about"
                   className="block text-sm font-medium text-gray-700"
-                >
-                  Comment
-                </label>
+                ></label>
                 <div className="mt-1">
                   <textarea
                     type="text"
                     value={title}
                     onChange={e => setTitle(e.target.value)}
                     rows="3"
+                    placeholder="Share your exprience"
                     className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    placeholder="you@example.com"
                   />
                   <button
                     type="submit"

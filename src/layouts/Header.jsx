@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown';
+import useAuth from '../hook/useAuth';
 
 export default function () {
+  const { logout, authenticatedUser } = useAuth();
+
   return (
     <>
       <div className="relative bg-white">
@@ -32,6 +35,15 @@ export default function () {
                 <i className="fa-solid fa-magnifying-glass "></i>
               </div>
             </div>
+            <div>
+              {authenticatedUser?.role === 'admin' && (
+                <Link to="/admincreate">
+                  <button className=" bg-orange-400 border rounded-md h-10 w-40">
+                    Create Restaurant
+                  </button>
+                </Link>
+              )}
+            </div>
 
             {/* <div className="grid grid-cols-3 gap-4">
               {/* <div className="bg-orange-200 text-base text-blue-600"></div> */}
@@ -49,6 +61,12 @@ export default function () {
             <div className="grid grid-cols-3 gap-4">
               <Dropdown />
             </div>
+            <button
+              className=" bg-gray-400 border rounded-md h-10 w-20"
+              onClick={logout}
+            >
+              logout
+            </button>
           </div>
         </div>
       </div>

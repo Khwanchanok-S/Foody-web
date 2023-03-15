@@ -1,19 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../config/axios';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import useAuth from '../hook/useAuth';
 
 export default function InformationLayout() {
+  const { authenticatedUser } = useAuth();
   const [showPhoto, setShowPhoto] = useState({});
   const { restaurantId } = useParams();
   console.log(showPhoto);
+  const navigate = useNavigate();
 
   const fetchPhoto = async () => {
     try {
       const response = await axios.get(`/restaurants/${restaurantId}`);
+      console.log(response);
       const photoShow = response.data.restaurant;
-      console.log('ffffffff ', response);
+
       // console.log('ffffffff ', response.data.restaurant);
       setShowPhoto(photoShow);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDeleteRestaurant = async restaurantId => {
+    try {
+      await axios.delete(`/restaurants/${restaurantId}`);
+      navigate('/');
     } catch (err) {
       console.log(err);
     }
@@ -23,19 +36,40 @@ export default function InformationLayout() {
     fetchPhoto();
   }, []);
 
-  console.log('showPhoto ---> ', showPhoto?.Images && showPhoto?.Images[1]);
-
   return (
     <>
-      <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-        <div className="aspect-w-3 aspect-h-4 Hidden overflow-Hidden rounded-lg lg:block">
+      {authenticatedUser.role === 'admin' ? (
+        <div className=" flex justify-end px-10">
+          {/* <Link to="/editrestaurant"> */}
+          <button
+            onClick={() =>
+              navigate(`/editrestaurant/${restaurantId}`, {
+                state: { showPhoto, restaurantId },
+              })
+            }
+            className=" border rounded-lg bg-gray-200 w-20"
+          >
+            Edit
+          </button>
+          {/* </Link> */}
+          <button
+            className=" border rounded-lg bg-red-500 w-20"
+            onClick={() => handleDeleteRestaurant(restaurantId)}
+          >
+            Delete
+          </button>
+        </div>
+      ) : null}
+      {/* <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8"> */}
+      <div className="flex justify-center">
+        <div className="h-ful w-full py-10 px-40">
           <img
             src={showPhoto?.profileImage}
             alt="Two each of gray, white, and black shirts laying flat."
             className="h-full w-full object-cover object-center"
           />
         </div>
-        <div className="Hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+        {/* <div className="Hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
           <div className="aspect-w-3 aspect-h-2 overflow-Hidden rounded-lg">
             <img
               src={showPhoto?.Images && showPhoto?.Images[1]?.url}
@@ -57,12 +91,12 @@ export default function InformationLayout() {
             alt="Model wearing plain white basic tee."
             className="h-full w-full object-cover object-center"
           />
-        </div>
+        </div> */}
       </div>
-      <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24 border-2 border-r-red-600">
+      <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24 ">
         <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
           <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-            {showPhoto.Name}
+            {showPhoto.name}
           </h1>
           <h5 className="text-xl  tracking-tight text-gray-900 sm:text-1xl">
             {showPhoto.information}

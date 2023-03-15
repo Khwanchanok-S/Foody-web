@@ -32,7 +32,7 @@ export default function Homepage() {
           <i className="fa-solid fa-magnifying-glass "></i>
         </div>
 
-        <div className=" flex justify-evenly ">
+        {/* <div className=" flex justify-evenly ">
           <div className="items-center  rounded-full border border-transparent px-10 py-10 text-base font-medium text-white shadow-sm bg-orange-400">
             <Link className="navbar-brand" to="/login">
               ร้านน้องใหม่
@@ -50,7 +50,7 @@ export default function Homepage() {
               รีวิว{' '}
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="bg-white ">
@@ -85,10 +85,10 @@ export default function Homepage() {
                             {el.Category.Name}
                           </a>
                         </h3>
-                        <p className="mt-1 text-sm text-gray-500">{el.Name}</p>
+                        <p className="mt-1 text-sm text-gray-500">{el.name}</p>
                       </div>
                       <p className="text-sm font-medium text-gray-900">
-                        {el.Location}
+                        {el.location}
                       </p>
                     </div>
                   </div>
