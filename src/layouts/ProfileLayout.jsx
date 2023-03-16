@@ -9,9 +9,6 @@ export default function ProfileLayout() {
   console.log(authenticatedUser);
 
   const initialEditInput = {
-    // firstName: '',
-    // lastName: '',
-    // profileImage: authenticatedUser.profileImage,
     firstName: authenticatedUser.firstName,
     lastName: authenticatedUser.lastName,
   };
